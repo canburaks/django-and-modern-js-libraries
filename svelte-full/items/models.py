@@ -1,5 +1,17 @@
 # items.models
 from django.db import models
+
+
+class Page(models.Model):
+    name = models.CharField(max_length=100)
+    html = models.TextField(max_length=500000,null=True)
+
+    # the method which defines string output of class
+    def __str__(self):
+        return self.name
+        
+
+
  
 class Movie(models.Model):
     id = models.IntegerField(primary_key=True)

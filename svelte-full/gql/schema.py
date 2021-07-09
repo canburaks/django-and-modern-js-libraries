@@ -1,6 +1,23 @@
 import graphene
-from items.models import Movie
+from items.models import Movie, Page
 from graphene_django.types import DjangoObjectType
+
+# api-movie-model
+class PageType(DjangoObjectType):
+    name = graphene.String()
+    html = graphene.String()
+    
+    # define which model will be the base
+    class Meta:
+        model = Page
+    
+    
+    def resolve_name(self, info):
+        return self.name
+
+    def resolve_html(self, info):
+        return self.html
+
 
 # api-movie-model
 class MovieType(DjangoObjectType):
@@ -38,6 +55,10 @@ class MovieType(DjangoObjectType):
 class Query(graphene.ObjectType):
     movie_list = graphene.List(MovieType)
     movie = graphene.Field(MovieType, slug=graphene.String())
+    page = graphene.Field(PageType, name=graphene.String())
+
+    def resolve_page(self, info,name):
+        return Page.objects.filter(name=name).first()
 
     def resolve_movie_list(self, info, *_):
         # for large lists only query what you need
@@ -48,4 +69,30 @@ class Query(graphene.ObjectType):
         if movie_queryset.exists():
             return movie_queryset.first()
 
-schema = graphene.Schema(query=Query)
+
+
+class PageMutation(graphene.Mutation):
+    page = graphene.Field(PageType)
+    message = graphene.String()
+
+    class Arguments:
+        name = graphene.String()
+        html = graphene.String()
+
+    def mutate(self, info, name, html):
+        page_qs = Page.objects.filter(name=name)
+        if page_qs.exists():
+            page = page_qs.first()
+            page.html = html
+            page.save()
+            return PageMutation(page=page, message="Success")
+        else:
+            return PageMutation(message="Page is not found")
+
+
+
+
+class Mutation(graphene.ObjectType):
+    page_mutation = PageMutation.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
