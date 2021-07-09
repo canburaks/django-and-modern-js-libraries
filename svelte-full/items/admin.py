@@ -1,3 +1,7 @@
 from django.contrib import admin
+from items.models import Page
 
-# Register your models here.
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_display = ("name", )
+    #resource_class = TagResource

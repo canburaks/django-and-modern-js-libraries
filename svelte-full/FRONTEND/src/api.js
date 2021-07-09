@@ -36,6 +36,22 @@ export const MOVIE_QUERY = `
         }
     }
 `
+export const PAGE_QUERY = `
+    query page($name:String!){
+        page(name:$name){
+            name, html
+        }
+    }
+`
+
+export const PAGE_MUTATION = `
+  mutation pageMutation($name: String, $html:String) {
+    pageMutation(name:$name, html:$html) {
+      page {name, html}
+      message
+    }
+  }
+`;
 
 // This is generic query function
 // We will use this with one of the above queries and
@@ -46,3 +62,6 @@ export async function get(query, variables = null) {
     return response
 }
 
+export async function mutate(mutation, variables = null) {
+    return await client.mutate( { query:mutation, variables })
+  }
