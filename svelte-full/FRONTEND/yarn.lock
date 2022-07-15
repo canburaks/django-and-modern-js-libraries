@@ -4058,9 +4058,9 @@ svelte-routing@^1.4.2:
   integrity sha512-CSCKRLeOp9vjsDGGOEgL9DPm9HZLgZuTNehyTCl3K+6fCVH1Aw/K/WicavAVNcbsHmdR4wgF//0YVR9hrcdvGA==
 
 svelte@^3.23.0:
-  version "3.27.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.27.0.tgz#69660e08470f8026ee055f88f98b9a77f243ad13"
-  integrity sha512-yF8+ikXVaLwP32GhGZ6lT69lXBJ1r9KsYq6W5wDCzpPexiWQydLtqV+Bbc6BYTYeUNEW4Zx+BSXIDp/QleGqRw==
+  version "3.49.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.49.0.tgz#5baee3c672306de1070c3b7888fc2204e36a4029"
+  integrity sha512-+lmjic1pApJWDfPCpUUTc1m8azDqYCG1JN9YEngrx/hUyIcFJo6VZhj0A1Ai0wqoHcEIuQy+e9tk+4uDgdtsFA==
 
 symbol-observable@^1.2.0:
   version "1.2.0"
